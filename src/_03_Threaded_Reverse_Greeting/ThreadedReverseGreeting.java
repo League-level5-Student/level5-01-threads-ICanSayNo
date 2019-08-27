@@ -7,4 +7,20 @@ public class ThreadedReverseGreeting {
   //but you should structure your program such that the threads print their greetings in reverse order.
 	
 	/* HINT: You will most likely need to do this with recursion */
+	public static void main(String[] args) {
+		System.out.println(factorial(50));
+	}
+	public static int factorial(int num) {
+		if (num==0) {
+			return 1;
+		}
+		else {
+			System.out.println(num);
+			return num + (factorial(num-1));
+			
+		}
+	}
+	Thread tr = new Thread();
+	
+	
 }
