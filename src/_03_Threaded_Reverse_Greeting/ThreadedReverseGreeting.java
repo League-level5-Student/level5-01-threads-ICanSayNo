@@ -8,19 +8,30 @@ public class ThreadedReverseGreeting {
 	
 	/* HINT: You will most likely need to do this with recursion */
 	public static void main(String[] args) {
-		System.out.println(factorial(50));
+		int size = 5000;
+		factorial(size, size);
 	}
-	public static int factorial(int num) {
+	/*static Runnable runnable = new Runnable() {
+		public void run(){
+			System.out.println("Hello from " + Thread.currentThread().getName());
+		}
+	};*/
+	public static void factorial(int num, int total) {
 		if (num==0) {
-			return 1;
+			return;
 		}
 		else {
-			System.out.println(num);
-			return num + (factorial(num-1));
+			Runner run = new Runner();
+			Thread thread = new Thread(run, "Thread " + num);
+			thread.start();
+			try {
+				thread.sleep(total/num);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			factorial((num-1), total);
 			
 		}
 	}
-	Thread tr = new Thread();
-	
-	
 }
