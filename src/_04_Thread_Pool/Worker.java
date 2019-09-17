@@ -7,7 +7,7 @@ public class Worker implements Runnable {
 	ConcurrentLinkedQueue<Task> taskQueue;
 	
 	public Worker(ConcurrentLinkedQueue<Task> taskQueue) {
-		taskQueue = new ConcurrentLinkedQueue<Task>();
+		this.taskQueue = taskQueue;
 	
 	}
 	
@@ -15,7 +15,7 @@ public class Worker implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		
-		while (taskQueue.isEmpty()){
+		while (!taskQueue.isEmpty()){
 			taskQueue.poll().perform();
 		}
 		

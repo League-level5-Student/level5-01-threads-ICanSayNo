@@ -9,9 +9,30 @@ public class ThreadPool {
 	
 	public ThreadPool(int totalThreads) {
 		threads = new Thread[totalThreads];
+		taskQueue = new ConcurrentLinkedQueue<Task>();
 		for (int i = 0; i < threads.length; i++) {
-			threads[i]
+			threads[i] = new Thread(new Worker(taskQueue));
 		}
 	}
-	
+
+	public void addTask(Task task) {
+		// TODO Auto-generated method stub
+		taskQueue.add(task);
+	}
+
+	public void start() {
+		// TODO Auto-generated method stub
+		 for (int i = 0; i < threads.length; i++) {
+			threads[i].start();
+		}
+		 for (int i = 0; i < threads.length; i++) {
+			 try {
+				   threads[i].join();
+			 	} catch (InterruptedException e) {
+				   // TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		 }
+	}
+
 }
